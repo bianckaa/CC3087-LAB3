@@ -1,6 +1,7 @@
 package com.example.laboratorio_3
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -14,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -40,8 +42,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ListaTareasScreen() {
+    val currentContext = LocalContext.current
     var nuevaTarea by remember { mutableStateOf("") }
     val tareas = remember { mutableStateListOf<String>() }
+
+    val mensajeErrorTareaVacia = stringResource(R.string.tarea_vacia)
 
     Column(
         modifier = Modifier
@@ -50,6 +55,10 @@ fun ListaTareasScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        Text(
+            stringResource(R.string.titulos),
+            modifier = Modifier.padding(top = 16.dp),
+        )
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -76,10 +85,15 @@ fun ListaTareasScreen() {
 
         Spacer(modifier = Modifier.height(8.dp))
 
+
         Button(
             onClick = {
-                if (nuevaTarea.isNotBlank()) {
-                    tareas.add(nuevaTarea.trim())
+                if (nuevaTarea.isBlank()) {
+                    Toast.makeText(currentContext,
+                        mensajeErrorTareaVacia,
+                        Toast.LENGTH_SHORT).show()
+                }else{
+                    tareas.add(nuevaTarea)
                     nuevaTarea = ""
                 }
             },
