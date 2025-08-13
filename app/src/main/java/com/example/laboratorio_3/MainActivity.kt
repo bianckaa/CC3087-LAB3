@@ -50,6 +50,22 @@ fun ListaTareasScreen() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ) {
+            items(tareas) { tarea ->
+                Text(
+                    text = tarea,
+                    style = MaterialTheme.typography.bodyLarge,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp, horizontal = 12.dp)
+                )
+            }
+        }
+
         TextField(
             value = nuevaTarea,
             onValueChange = { nuevaTarea = it },
@@ -67,29 +83,11 @@ fun ListaTareasScreen() {
                     nuevaTarea = ""
                 }
             },
-            modifier = Modifier.width(150.dp)
+            modifier = Modifier.width(200.dp).padding(bottom = 50.dp)
         ) {
             Text(stringResource(R.string.agregar_tarea),
                 fontWeight = FontWeight.Bold, 
                 fontSize = 16.sp)
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-        ) {
-            items(tareas) { tarea ->
-                Text(
-                    text = tarea,
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp, horizontal = 12.dp)
-                )
-            }
         }
     }
 }
