@@ -125,7 +125,7 @@ fun ListaTareasScreen() {
                     Toast.makeText(currentContext,
                         mensajeErrorTareaVacia,
                         Toast.LENGTH_SHORT)
-                        .show()
+                        .show
                 } else {
                     tareas.add(nuevaTarea)
                     nuevaTarea = ""
