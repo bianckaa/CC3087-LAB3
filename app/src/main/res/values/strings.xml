@@ -2,9 +2,7 @@
     <string name="app_name">Laboratorio_3</string>
     <string name="tarea_vacia">Error: no puedes agregar una tarea vacia</string>
     <string name="agregar_tarea">Agregar tarea</string>
-<<<<<<< HEAD
     <string name="titulos">Lista de Tareas</string>
-=======
     <string name="lista_vacia">No hay nada por aquí ahora (._.)</string>
->>>>>>> 0cf1b76e8bf928b3b3697ef505a1f842955f186f
+
 </resources>
