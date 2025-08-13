@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -53,17 +54,32 @@ fun ListaTareasScreen() {
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)
+                .weight(1f),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            items(tareas) { tarea ->
-                Text(
-                    text = tarea,
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp, horizontal = 12.dp)
-                )
+            if (tareas.isEmpty()) {
+                item {
+                    Text(
+                        text = stringResource(R.string.lista_vacia),
+                        modifier = Modifier
+                            .padding(top = 32.dp),
+                        color = colorResource(id = R.color.text_blue),
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                }
+            } else {
+                items(tareas) { tarea ->
+                    Text(
+                        text = tarea,
+                        color = colorResource(id = R.color.text_blue),
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp, horizontal = 8.dp)
+                    )
+                }
             }
+
         }
 
         TextField(
@@ -83,7 +99,9 @@ fun ListaTareasScreen() {
                     nuevaTarea = ""
                 }
             },
-            modifier = Modifier.width(200.dp).padding(bottom = 50.dp)
+            modifier = Modifier
+                .width(200.dp)
+                .padding(bottom = 50.dp)
         ) {
             Text(stringResource(R.string.agregar_tarea),
                 fontWeight = FontWeight.Bold, 
