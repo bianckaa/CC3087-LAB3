@@ -57,11 +57,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun ListaTareasScreen() {
-    val currentContext = LocalContext.current
+    LocalContext.current
     var nuevaTarea by remember { mutableStateOf("") }
     val tareas = remember { mutableStateListOf<String>() }
 
-    val mensajeErrorTareaVacia = stringResource(R.string.tarea_vacia)
+    stringResource(R.string.tarea_vacia)
 
     Column(
         modifier = Modifier
