@@ -2,4 +2,4 @@
 
 ## Video demostrativo
 
-[![Ver video]](https://youtube.com/shorts/fGszn49WSO8)
+[[Ver video]](https://youtube.com/shorts/fGszn49WSO8)
