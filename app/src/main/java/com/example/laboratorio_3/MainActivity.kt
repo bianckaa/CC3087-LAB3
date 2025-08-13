@@ -72,7 +72,8 @@ fun ListaTareasScreen() {
     ) {
         Text(
             stringResource(R.string.titulos),
-            modifier = Modifier.padding(top = 16.dp),
+            modifier = Modifier.padding(top = 16.dp, start = 60.dp),
+            fontWeight = FontWeight.Bold,
         )
         LazyColumn(
             modifier = Modifier
@@ -85,7 +86,7 @@ fun ListaTareasScreen() {
                     Text(
                         text = stringResource(R.string.lista_vacia),
                         modifier = Modifier
-                            .padding(top = 32.dp),
+                            .padding(top = 58.dp),
                         color = colorResource(id = R.color.text_blue),
                         fontWeight = FontWeight.SemiBold,
                     )
