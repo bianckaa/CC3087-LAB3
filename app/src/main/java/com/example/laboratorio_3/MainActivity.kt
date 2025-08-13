@@ -1,6 +1,7 @@
 package com.example.laboratorio_3
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -72,8 +73,9 @@ fun ListaTareasScreen() {
     ) {
         Text(
             stringResource(R.string.titulos),
-            modifier = Modifier.padding(top = 16.dp, start = 60.dp),
+            modifier = Modifier.padding(top = 16.dp, start = 90.dp),
             fontWeight = FontWeight.Bold,
+            fontSize = 24.sp,
         )
         LazyColumn(
             modifier = Modifier
@@ -119,8 +121,13 @@ fun ListaTareasScreen() {
 
         Button(
             onClick = {
-                if (nuevaTarea.isNotBlank()) {
-                    tareas.add(nuevaTarea.trim())
+                if (nuevaTarea.isBlank()) {
+                    Toast.makeText(currentContext,
+                        mensajeErrorTareaVacia,
+                        Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    tareas.add(nuevaTarea)
                     nuevaTarea = ""
                 }
             },
