@@ -109,7 +109,7 @@ fun ListaTareasScreen() {
         TextField(
             value = nuevaTarea,
             onValueChange = { nuevaTarea = it },
-            label = { Text("Escribe una tarea") },
+            label = { Text(stringResource(R.string.agregar_tarea)) },
             modifier = Modifier.width(300.dp),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
         )
