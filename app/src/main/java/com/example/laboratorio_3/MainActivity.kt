@@ -1,21 +1,36 @@
 package com.example.laboratorio_3
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -62,17 +77,32 @@ fun ListaTareasScreen() {
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)
+                .weight(1f),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            items(tareas) { tarea ->
-                Text(
-                    text = tarea,
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp, horizontal = 12.dp)
-                )
+            if (tareas.isEmpty()) {
+                item {
+                    Text(
+                        text = stringResource(R.string.lista_vacia),
+                        modifier = Modifier
+                            .padding(top = 32.dp),
+                        color = colorResource(id = R.color.text_blue),
+                        fontWeight = FontWeight.SemiBold,
+                    )
+                }
+            } else {
+                items(tareas) { tarea ->
+                    Text(
+                        text = tarea,
+                        color = colorResource(id = R.color.text_blue),
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp, horizontal = 8.dp)
+                    )
+                }
             }
+
         }
 
         TextField(
@@ -88,19 +118,17 @@ fun ListaTareasScreen() {
 
         Button(
             onClick = {
-                if (nuevaTarea.isBlank()) {
-                    Toast.makeText(currentContext,
-                        mensajeErrorTareaVacia,
-                        Toast.LENGTH_SHORT).show()
-                }else{
-                    tareas.add(nuevaTarea)
+                if (nuevaTarea.isNotBlank()) {
+                    tareas.add(nuevaTarea.trim())
                     nuevaTarea = ""
                 }
             },
-            modifier = Modifier.width(200.dp).padding(bottom = 50.dp)
+            modifier = Modifier
+                .width(200.dp)
+                .padding(bottom = 50.dp)
         ) {
             Text(stringResource(R.string.agregar_tarea),
-                fontWeight = FontWeight.Bold, 
+                fontWeight = FontWeight.Bold,
                 fontSize = 16.sp)
         }
     }
